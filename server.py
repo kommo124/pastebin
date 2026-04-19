@@ -34,7 +34,7 @@ def init_db():
 
     conn.commit()
 
-    conn.close
+    conn.close()
 
 init_db()
 
@@ -47,11 +47,22 @@ async def submit_form(data: DataForm):
     cursor.execute('''
         INSERT INTO pasteTable (text, tag)
         VALUES (?, ?)
-        ''', (data.text, data.tag))      # ← запятая внутри, после execute нет!
-        
-        
+        ''', (data.text, data.tag))
 
+    cursor.execute("SELECT * FROM pasteTable")
     conn.commit()
     conn.close()
 
 
+@app.get('/data')
+async def getData():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM pasteTable")
+    rows = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return [{"text": r[0], "tag": r[1]} for r in rows]
