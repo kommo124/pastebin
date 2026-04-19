@@ -1,0 +1,72 @@
+html, body {
+    /* display: flex; */
+    height: 100%;
+    margin: 0;
+    
+    /* align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: black; */
+}
+
+.wrapper {
+    
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-area {
+    flex: 1;
+    width: 100%;
+    resize: none;
+    font-size: 20px;
+}
+
+.add-to-db {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    
+}
+
+.tag-input {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.get-data {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-records {
+    padding: 10px 15px;
+    color: white;
+    
+}
+
+.output {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    border: 2px solid #896E69;
+    border-radius: 5px;
+    background-color: #896E69;
+    
+    
+    
+}
+
+.all-records.show {
+    max-height: 100px;
+}
+
+.output div.show {
+    max-height: 100px;
+}
