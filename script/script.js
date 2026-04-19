@@ -7,7 +7,7 @@ form.addEventListener('submit', async (e) => {
 
     const data = {
         text: document.getElementById('textArea').value,
-        tag: document.getElementById('tagInput').value
+        
     }
 
     try {
@@ -43,7 +43,8 @@ async function loadData() {
 
         data.forEach(item => {
             const div = document.createElement('div')
-            div.textContent = `Текст: ${item.text}, Тэг: ${item.tag}`
+            div.textContent = `Текст: ${item.text}}`
+            div.classList.add('all-records')
             outputContainer.appendChild(div)
         
            
