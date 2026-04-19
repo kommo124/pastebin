@@ -17,8 +17,6 @@ app.add_middleware(
 
 class DataForm(BaseModel):
     text: str
-    tag: str
-
 
 def init_db():
     conn = sqlite3.connect('database.db')
@@ -27,8 +25,8 @@ def init_db():
 
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS pasteTable (
-        text TEXT NOT NULL,
-        tag TEXT NOT NULL
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        text TEXT NOT NULL
     )
 ''')
 
@@ -45,11 +43,11 @@ async def submit_form(data: DataForm):
     cursor = conn.cursor()
 
     cursor.execute('''
-        INSERT INTO pasteTable (text, tag)
-        VALUES (?, ?)
-        ''', (data.text, data.tag))
+        INSERT INTO pasteTable (text)
+        VALUES (?)
+        ''', (data.text,))
 
-    cursor.execute("SELECT * FROM pasteTable")
+    
     conn.commit()
     conn.close()
 
@@ -65,4 +63,4 @@ async def getData():
     conn.commit()
     conn.close()
 
-    return [{"text": r[0], "tag": r[1]} for r in rows]
+    return [{"text": r[0]} for r in rows]
