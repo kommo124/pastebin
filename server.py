@@ -1,29 +1,26 @@
-from fastapi import FastApi
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sqlite3
 
-app = FastApi()
+app = FastAPI()
 
-origins = [
-    "http://localhost",
-    "http://localhost:8000"
-]
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = origins,
+    allow_origins = ["*"],
     allow_credentials = True,
     allow_methods = ["*"],
     allow_headers = ["*"]
 )
 
 class DataForm(BaseModel):
-    text str,
-    tag str,
+    text: str
+    tag: str
 
 
-async def init_db():
+def init_db():
     conn = sqlite3.connect('database.db')
 
     cursor = conn.cursor()
@@ -35,20 +32,26 @@ async def init_db():
     )
 ''')
 
-conn.commit()
+    conn.commit()
 
-conn.close
+    conn.close
+
+init_db()
 
 @app.post("/submit")
-async def submit_form(data: DataForm)
+async def submit_form(data: DataForm):
     conn = sqlite3.connect('database.db')
 
     cursor = conn.cursor()
 
     cursor.execute('''
-    INSERT INTO pasteTable (text, tag)
-    VALUES (?, ?)
-    '''), (data.text, data.tag)
+        INSERT INTO pasteTable (text, tag)
+        VALUES (?, ?)
+        ''', (data.text, data.tag))      # ← запятая внутри, после execute нет!
+        
+        
 
     conn.commit()
     conn.close()
+
+
