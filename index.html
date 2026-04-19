@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastebin</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+    <!-- <button class="get-data"  onclick="loadData()">Получить все записи</button> -->
     <form id="mainForm">
-        <textarea name="123" id="textArea"></textarea>
-        <input type="text" id="tagInput">
-        <button id="toDb">Добавить данные в базу</button>
-        <div id="output"></div>
+        
+        <div class="wrapper">
+            <textarea name="123" id="textArea" class="text-area" required></textarea>
+            <button id="toDb" class="add-to-db">
+                <img src="imgs/save.png" alt="">
+            </button>
+        </div>
+        <!-- <input type="text" id="tagInput" class="tag-input" placeholder="Введите тэг для отслеживания" required> -->
+        
+        <div id="output" class="output"></div> -->
     </form>
-    <button  onclick="loadData()">Получить все записи</button>
+    
     <script src="script/script.js"></script>
 </body>
 </html>
